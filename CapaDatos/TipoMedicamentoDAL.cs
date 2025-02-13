@@ -1,92 +1,72 @@
-﻿using CapaEntidad;
-using Microsoft.Extensions.Configuration;
-using System.Data.SqlClient;
+﻿using CapaDatos;
+using CapaEntidad;
+using System.Data;
 
-namespace CapaDatos
+public class TipoMedicamentoDAL
 {
-    public class TipoMedicamentoDAL
+    public List<TipoMedicamentoCLS> listarTipoMedicamento()
     {
-        public List<TipoMedicamentoCLS> listarTipoMedicamento()
+        List<TipoMedicamentoCLS> lista = new List<TipoMedicamentoCLS>();
+        try
         {
-            List<TipoMedicamentoCLS> lista = new List<TipoMedicamentoCLS>();
-
-            IConfigurationBuilder builder = new ConfigurationBuilder();
-            builder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"));
-            var root = builder.Build();
-            var cadenaDato = root.GetConnectionString("cn");
-
-            using (SqlConnection cn = new SqlConnection(cadenaDato))
+            string sql = "SELECT IIDTIPOMEDICAMENTO, NOMBRE, DESCRIPCION FROM TipoMedicamento WHERE BHABILITADO = 1";
+            using (var drd = DatabaseHelper.ExecuteReader(sql, CommandType.Text))
             {
-                cn.Open();
-                try
+                if (drd != null)
                 {
-                    using (SqlCommand cmd = new SqlCommand("SELECT IIDTIPOMEDICAMENTO, NOMBRE,DESCRIPCION FROM TipoMedicamento WHERE BHABILITADO =1", cn))
+                    while (drd.Read())
                     {
-                        cmd.CommandType = System.Data.CommandType.Text;
-                        SqlDataReader drd = cmd.ExecuteReader();
-
-                        if (drd != null)
+                        lista.Add(new TipoMedicamentoCLS
                         {
-                            TipoMedicamentoCLS oTipoMedicamentoCLS;
-                            lista = new List<TipoMedicamentoCLS>();
-                            while (drd.Read())
-                            {
-                                oTipoMedicamentoCLS = new TipoMedicamentoCLS();
-                                oTipoMedicamentoCLS.idMedicamento = drd.GetInt32(0);
-                                oTipoMedicamentoCLS.nombre = drd.GetString(1);
-                                oTipoMedicamentoCLS.descripcion = drd.GetString(2);
-                                lista.Add(oTipoMedicamentoCLS);
-                            }
-
-                        }
-
+                            idMedicamento = drd.GetInt32(0),
+                            nombre = drd.GetString(1),
+                            descripcion = drd.GetString(2)
+                        });
                     }
                 }
-                catch (Exception)
-                {
-                    cn.Close();
-                    cn.Dispose();
-                    lista = null;
-                }
             }
-            return lista;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public List<TipoMedicamentoCLS> listarTipoMedicamento()
-        //{
-        //    List<TipoMedicamentoCLS> lista = new List<TipoMedicamentoCLS>();
-        //    lista.Add(new TipoMedicamentoCLS
-        //    {
-        //        idMedicamento = 1,
-        //        nombre = "Analgésico",
-        //        descripcion = "Desc 1"
-        //    });
-        //    lista.Add(new TipoMedicamentoCLS
-        //    {
-        //        idMedicamento = 2,
-        //        nombre = "Paracetamol",
-        //        descripcion = "Desc 2"
-        //    });
-        //    lista.Add(new TipoMedicamentoCLS
-        //    {
-        //        idMedicamento = 1,
-        //        nombre = "Vitamina C",
-        //        descripcion = "Desc 3"
-        //    });
-        //    return lista;
-
+        catch (Exception)
+        {
+            lista = null;
+        }
+        return lista;
     }
-    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//public List<TipoMedicamentoCLS> listarTipoMedicamento()
+//{
+//    List<TipoMedicamentoCLS> lista = new List<TipoMedicamentoCLS>();
+//    lista.Add(new TipoMedicamentoCLS
+//    {
+//        idMedicamento = 1,
+//        nombre = "Analgésico",
+//        descripcion = "Desc 1"
+//    });
+//    lista.Add(new TipoMedicamentoCLS
+//    {
+//        idMedicamento = 2,
+//        nombre = "Paracetamol",
+//        descripcion = "Desc 2"
+//    });
+//    lista.Add(new TipoMedicamentoCLS
+//    {
+//        idMedicamento = 1,
+//        nombre = "Vitamina C",
+//        descripcion = "Desc 3"
+//    });
+//    return lista;
+
+//}
+//}

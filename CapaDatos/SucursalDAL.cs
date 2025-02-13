@@ -1,55 +1,34 @@
-﻿using CapaEntidad;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.IO;
+﻿using CapaDatos;
+using CapaEntidad;
+using System.Data;
 
-namespace CapaDatos
+public class SucursalDAL
 {
-    public class SucursalDAL
+    public List<SucursalCLS> listarSucursales()
     {
-        public List<SucursalCLS> listarSucursales()
+        List<SucursalCLS> lista = new List<SucursalCLS>();
+        try
         {
-            List<SucursalCLS> lista = new List<SucursalCLS>();
-
-            IConfigurationBuilder builder = new ConfigurationBuilder();
-            builder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"));
-            var root = builder.Build();
-            var cadenaDato = root.GetConnectionString("cn");
-
-            using (SqlConnection cn = new SqlConnection(cadenaDato))
+            using (var drd = DatabaseHelper.ExecuteReader("uspListarSucursal", CommandType.StoredProcedure))
             {
-                cn.Open();
-                try
+                if (drd != null)
                 {
-                    using (SqlCommand cmd = new SqlCommand("uspListarSucursal", cn))
+                    while (drd.Read())
                     {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        SqlDataReader drd = cmd.ExecuteReader();
-
-                        if (drd != null)
+                        lista.Add(new SucursalCLS
                         {
-                            SucursalCLS oSucursalCLS;
-                            lista = new List<SucursalCLS>();
-                            while (drd.Read())
-                            {
-                                oSucursalCLS = new SucursalCLS();
-                                oSucursalCLS.IIDSUCURSAL = drd.GetInt32(0);
-                                oSucursalCLS.NOMBRE = drd.GetString(1);
-                                oSucursalCLS.DIRECCION = drd.GetString(2);
-                                lista.Add(oSucursalCLS);
-                            }
-                        }
+                            IIDSUCURSAL = drd.GetInt32(0),
+                            NOMBRE = drd.GetString(1),
+                            DIRECCION = drd.GetString(2)
+                        });
                     }
                 }
-                catch (Exception)
-                {
-                    cn.Close();
-                    cn.Dispose();
-                    lista = null;
-                }
             }
-            return lista;
         }
+        catch (Exception)
+        {
+            lista = null;
+        }
+        return lista;
     }
 }
