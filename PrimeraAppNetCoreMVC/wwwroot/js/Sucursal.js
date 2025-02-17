@@ -29,3 +29,14 @@ function LimpiarControl() {
 function get(id) {
     return document.getElementById(id).value;
 }
+function filtrarSucursal() {
+    let nombre = get("txtNombreBusqueda")
+
+    if (nombre == "") {
+        listarSucursales();
+    } else {
+        objSucursal.url = "Sucursal/filtrarSucursal?nombresucursal=" + nombre;
+        pintar(objSucursal);
+
+    }
+}

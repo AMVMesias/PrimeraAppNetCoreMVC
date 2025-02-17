@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Laboratorio";
+}
+
+<h1>Laboratorio</h1>
+
+
+<fieldset>
+    <legend>Busqueda de Laboratorios</legend>
+    <div class="row g-3" id=" " onclick="">
+      <form action="/" method="post">
+
+        <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+        </div>
+        <div class="col-md-6">
+            <label for="direccion" class="form-label">Direccion</label>
+            <input type="password" class="form-control" id="direccion" nombre placeholder="Direccion">
+        </div>
+        <div class="col-12">
+            <label for="personacontacto" class="form-label">Persona Contacto</label>
+            <input type="text" class="form-control" id="personacontacto" placeholder="Persona Contacto">
+        </div>
+        </form>
+    </div>
+</fieldset>
+<div class="row g-3">
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary" onclick="BuscarLaboratorio()">Busqueda</button>
+        <button type="submit" class="btn btn-danger">Limpiar</button>
+
+    </div>
+
+</div>
+<div id="divTabla"></div>
+
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/laboratorio.js"></script>

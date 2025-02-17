@@ -1,73 +1,36 @@
-﻿using CapaDatos;
-using CapaEntidad;
-using System.Data;
+﻿using CapaEntidad;
 using System.Data.SqlClient;
 
-public class SucursalDAL
+namespace CapaDatos
 {
-    public List<SucursalCLS> listarSucursales()
+    public class SucursalDAL : BaseDAL
     {
-        List<SucursalCLS> lista = new List<SucursalCLS>();
-        try
+        public List<SucursalCLS> listarSucursales()
         {
-            using (var drd = DatabaseHelper.ExecuteReader("uspListarSucursal", CommandType.StoredProcedure))
-            {
-                if (drd != null)
+            return EjecutarListado("uspListarSucursal",
+                drd => new SucursalCLS
                 {
-                    while (drd.Read())
-                    {
-                        lista.Add(new SucursalCLS
-                        {
-                            IIDSUCURSAL = drd.GetInt32(0),
-                            NOMBRE = drd.GetString(1),
-                            DIRECCION = drd.GetString(2)
-                        });
-                    }
-                }
-            }
+                    IIDSUCURSAL = drd.GetInt32(0),
+                    NOMBRE = drd.GetString(1),
+                    DIRECCION = drd.GetString(2)
+                });
         }
-        catch (Exception)
-        {
-            lista = null;
-        }
-        return lista;
-    }
 
-    public List<SucursalCLS> filtrarSucursal(string nombresucursal)
-    {
-        List<SucursalCLS> lista = new List<SucursalCLS>();
-        try
+        public List<SucursalCLS> filtrarSucursal(string nombresucursal)
         {
-            using (SqlConnection conn = new SqlConnection(DatabaseHelper.GetConnectionString()))
+            var parametros = new[]
             {
-                using (SqlCommand cmd = new SqlCommand("uspFiltrarSucursal", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@nombresucursal", nombresucursal);
+                new SqlParameter("@nombresucursal", nombresucursal)
+            };
 
-                    conn.Open();
-                    using (SqlDataReader drd = cmd.ExecuteReader())
-                    {
-                        if (drd != null)
-                        {
-                            while (drd.Read())
-                            {
-                                lista.Add(new SucursalCLS
-                                {
-                                    IIDSUCURSAL = drd.GetInt32(0),
-                                    NOMBRE = drd.GetString(1),
-                                    DIRECCION = drd.GetString(2)
-                                });
-                            }
-                        }
-                    }
-                }
-            }
+            return EjecutarListado("uspFiltrarSucursal",
+                drd => new SucursalCLS
+                {
+                    IIDSUCURSAL = drd.GetInt32(0),
+                    NOMBRE = drd.GetString(1),
+                    DIRECCION = drd.GetString(2)
+                },
+                parametros);
         }
-        catch (Exception)
-        {
-            lista = null;
-        }
-        return lista;
     }
 }
