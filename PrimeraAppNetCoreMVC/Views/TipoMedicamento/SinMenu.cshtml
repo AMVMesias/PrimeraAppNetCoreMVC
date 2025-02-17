@@ -4,8 +4,13 @@
 }
 
 <h1>SinMenu</h1>
-<div id="divTabla"></div>
 
+<div id="divTabla"></div>
+<div class="input-group mb-3">
+    <input type="text" id="txtNombreBusqueda" class="form-control" placeholder="Tipo de Medicamento" aria-label="Tipo de Medicamento" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="BuscarTipoMedicamento()">Buscar</button>
+    <button id="btnLimpiar" class="btn btn-outline-secondary" type="button" onclick="LimpiarControl()">Limpiar</button>
+</div>
 <script src="~/js/tipomedicamento.js"></script>
 <script src="~/js/generic.js"></script>
 <!-- Ejemplo de enlace en SinMenu.cshtml -->

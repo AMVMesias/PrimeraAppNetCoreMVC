@@ -7,16 +7,24 @@ namespace PrimeraAppNetCoreMVC.Controllers
 {
     public class SucursalController : Controller
     {
+        private SucursalBL sucursalBL = new SucursalBL(); // Declarar e inicializar la instancia de SucursalBL
 
         public JsonResult listarSucursales()
         {
-            SucursalBL obj = new SucursalBL();
-            var listaSucursales = obj.ListarSucursales();
+            var listaSucursales = sucursalBL.ListarSucursales();
             return Json(listaSucursales);
         }
+
+        public JsonResult filtrarSucursal(string nombresucursal) // Agregar el método filtrarSucursal
+        {
+            List<SucursalCLS> lista = sucursalBL.filtrarSucursal(nombresucursal); // Pasar el parámetro nombresucursal
+            return Json(lista);
+        }
+
         public IActionResult Detalle()
         {
             return View();
         }
     }
 }
+

@@ -43,7 +43,7 @@ function generarTabla(res) {
 
     
 
-    contenido += "<table class='table table-dark table-hover'>";
+    contenido += "<table class='table table-dark table-hover table-striped'>";
         contenido += "<thead>";
 
         /*Primera fila de la tabla con los headers*/

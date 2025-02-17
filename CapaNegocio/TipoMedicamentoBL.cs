@@ -1,14 +1,21 @@
 ﻿using CapaDatos;
 using CapaEntidad;
+using System.Collections.Generic;
 
 namespace CapaNegocio
 {
     public class TipoMedicamentoBL
     {
-        public List<TipoMedicamentoCLS> listarMedicamento()
+        private TipoMedicamentoDAL tipoMedicamentoDAL = new TipoMedicamentoDAL();
+
+        public List<TipoMedicamentoCLS> listarTipoMedicamento() // Asegúrate de que este método exista
         {
-            TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
-            return obj.listarTipoMedicamento();
+            return tipoMedicamentoDAL.listarTipoMedicamento();
+        }
+
+        public List<TipoMedicamentoCLS> filtrarTipoMedicamento(string nombreTipoMedicamento) // Asegúrate de que este método exista
+        {
+            return tipoMedicamentoDAL.filtrarTipoMedicamento(nombreTipoMedicamento);
         }
     }
 }

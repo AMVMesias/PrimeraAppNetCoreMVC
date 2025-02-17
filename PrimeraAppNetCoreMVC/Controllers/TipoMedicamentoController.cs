@@ -42,10 +42,10 @@ namespace PrimeraAppNetCoreMVC.Controllers
             return "Bienvenido " + nombre + " " + apellido;
         }
 
-        public List<TipoMedicamentoCLS> listarMedicamento()
+        public List<TipoMedicamentoCLS> listarTipoMedicamento() // Cambiar el nombre del método
         {
             TipoMedicamentoBL obj = new TipoMedicamentoBL();
-            return obj.listarMedicamento();
+            return obj.listarTipoMedicamento(); // Llamar al método listarTipoMedicamento
         }
 
         public string cadena()
@@ -54,6 +54,12 @@ namespace PrimeraAppNetCoreMVC.Controllers
             var configuration = HttpContext.RequestServices.GetService<IConfiguration>();
             var cadenaDato = configuration.GetConnectionString("cn");
             return cadenaDato;
+        }
+
+        public List<TipoMedicamentoCLS> filtrarTipoMedicamento(string nombreTipoMedicamento) // Cambiar el nombre del método
+        {
+            TipoMedicamentoBL obj = new TipoMedicamentoBL();
+            return obj.filtrarTipoMedicamento(nombreTipoMedicamento); // Llamar al método filtrarTipoMedicamento
         }
     }
 }
