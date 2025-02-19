@@ -13,9 +13,9 @@ namespace CapaNegocio
             return sucursalDAL.listarSucursales();
         }
 
-        public List<SucursalCLS> filtrarSucursal(string nombresucursal) // Aceptar el parámetro nombresucursal
+        public List<SucursalCLS> filtrarSucursal(string nombresucursal, string nombreDireccion) // Aceptar el parámetro nombresucursal
         {
-            return sucursalDAL.filtrarSucursal(nombresucursal); // Pasar el parámetro al método de SucursalDAL
+            return sucursalDAL.filtrarSucursal(nombresucursal, nombreDireccion); // Pasar el parámetro al método de SucursalDAL
         }
     }
 }

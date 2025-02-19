@@ -16,11 +16,13 @@ namespace CapaDatos
                 });
         }
 
-        public List<SucursalCLS> filtrarSucursal(string nombresucursal)
+        public List<SucursalCLS> filtrarSucursal(string nombresucursal, string nombreDireccion)
         {
             var parametros = new[]
             {
-                new SqlParameter("@nombresucursal", nombresucursal)
+                new SqlParameter("@nombresucursal", nombresucursal),
+                new SqlParameter("@direccion", nombreDireccion)
+
             };
 
             return EjecutarListado("uspFiltrarSucursal",

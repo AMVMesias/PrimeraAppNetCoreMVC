@@ -23,5 +23,19 @@ namespace CapaNegocio
                 throw;
             }
         }
+
+        public List<LaboratorioCLS> filtrarLaboratorio(string nombre, string direccion, string personacontacto)
+        {
+            try
+            {
+                CapaDatos.LaboratorioDAL laboratorioDAL = new CapaDatos.LaboratorioDAL();
+                return laboratorioDAL.filtrarLaboratorio(nombre, direccion, personacontacto);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al filtrar laboratorios: " + ex.Message);
+                throw;
+            }
+        }
     }
 }

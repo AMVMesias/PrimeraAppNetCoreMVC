@@ -1,14 +1,29 @@
-﻿
-@{
-    ViewData["Title"] = "Detalle";
+﻿@{
+    ViewData["Title"] = "Sucursal";
 }
-
-<h1>Detalle</h1>
-<div id="divTabla"></div>
-<div class="input-group mb-3">
-    <input type="text" id="txtNombreBusqueda" class="form-control" placeholder="Sucursal" aria-label="Sucursal" aria-describedby="button-addon2" onkeyup="filtrarSucursal()">
-@*     <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="BuscarSucursal()">Button</button>
-    <button id="btnLimpiar" class="btn btn-outline-secondary" type="button" onclick="LimpiarControl()">Limpiar</button>
-</div> *@
+<input type="hidden" id="hdfOculto" value="@Url.Content("~/")" />
+<h1>Sucursal</h1>
+<fieldset>
+    <legend>Busqueda de Sucursal</legend>
+    <form id="frmBusqueda" method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+            </div>
+            <div class="col-md-6">
+                <label for="direccion" class="form-label">Direccion</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion">
+            </div>
+        </div>
+    </form>
+</fieldset>
+<div class="row g-3 mt-3">
+    <div class="d-grid gap-2">
+        <button type="button" class="btn btn-primary" onclick="BuscarSucursal()">Buscar</button>
+        <button type="button" class="btn btn-danger" onclick="LimpiarFormulario()">Limpiar</button>
+    </div>
+</div>
+<div id="divTabla" class="mt-3"></div>
 <script src="~/js/generic.js"></script>
 <script src="~/js/sucursal.js"></script>

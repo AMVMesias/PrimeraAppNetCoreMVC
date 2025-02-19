@@ -1,6 +1,5 @@
 ﻿window.onload = function () {
     listarSucursales();
-    document.getElementById("btnBuscar").addEventListener("click", BuscarSucursal);
 }
 
 let objSucursal;
@@ -9,34 +8,25 @@ async function listarSucursales() {
     objSucursal = {
         url: "Sucursal/listarSucursales",
         cabeceras: ["ID Sucursal", "Nombre", "Dirección"],
-        //recuerda que solo en minusculas jala sisisi 
-        propiedades: ["iidsucursal", "nombre", "direccion"]
+        propiedades: ["iidsucursal", "nombre", "direccion"],
+        divContenedorTabla: "divTabla"
     };
     pintar(objSucursal);
 }
 
 function BuscarSucursal() {
-    let nombreSucursal = get("txtNombreBusqueda");
-    objSucursal.url = "Sucursal/filtrarSucursal?nombresucursal=" + nombreSucursal;
-    pintar(objSucursal);
-}
-
-function LimpiarControl() {
-    listarSucursales();
-    document.getElementById("txtNombreBusqueda").value = "";
-}
-
-function get(id) {
-    return document.getElementById(id).value;
-}
-function filtrarSucursal() {
-    let nombre = get("txtNombreBusqueda")
-
-    if (nombre == "") {
-        listarSucursales();
-    } else {
-        objSucursal.url = "Sucursal/filtrarSucursal?nombresucursal=" + nombre;
+    let forma = document.getElementById("frmBusqueda");
+    let frm = new FormData(forma);
+    fetchPost("Sucursal/filtrarSucursal", "json", frm, function (res) {
+        console.log('Datos recibidos del filtro:', res); // Agregar este log
+        objSucursal.datos = res;
         pintar(objSucursal);
-
-    }
+    });
+}
+function LimpiarDatos(idFormulario) {
+    const form = document.getElementById(idFormulario);
+    const elementos = form.querySelectorAll('input[type="text"]');
+    elementos.forEach(elemento => {
+        elemento.value = '';
+    });
 }

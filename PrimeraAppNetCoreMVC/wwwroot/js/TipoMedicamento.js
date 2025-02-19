@@ -26,10 +26,10 @@ function LimpiarControl() {
 }
 
 function filtrarTipoMedicamento() {
-    let nombre = get("txtNombreBusqueda")
+    let nombre = get("txtNombreBusqueda");
 
-    if (nombre == "") {
-        listarMedicamento();
+    if (nombre === "") {
+        listarTipoMedicamento();
     } else {
         objTipoMedicamento.url = "TipoMedicamento/filtrarTipoMedicamento?nombreTipoMedicamento=" + nombre;
         pintar(objTipoMedicamento);

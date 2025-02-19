@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CapaEntidad;
+using CapaNegocio;
 namespace PrimeraAppNetCoreMVC.Controllers
 {
     public class LaboratorioController : Controller
@@ -35,6 +36,13 @@ namespace PrimeraAppNetCoreMVC.Controllers
                 Console.WriteLine("Error al listar laboratorios: " + ex.Message);
                 throw;
             }
+        }
+
+
+        public List<LaboratorioCLS> filtrarLaboratorio(string nombre, string direccion, string personacontacto)
+        {
+            LaboratorioBL obj = new LaboratorioBL();
+            return obj.filtrarLaboratorio(nombre, direccion, personacontacto);
         }
 
         // POST: LaboratorioController/Create

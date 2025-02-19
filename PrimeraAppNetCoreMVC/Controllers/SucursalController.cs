@@ -15,9 +15,9 @@ namespace PrimeraAppNetCoreMVC.Controllers
             return Json(listaSucursales);
         }
 
-        public JsonResult filtrarSucursal(string nombresucursal) // Agregar el método filtrarSucursal
+        public JsonResult filtrarSucursal(string nombresucursal, string nombreDireccion) // Agregar el método filtrarSucursal
         {
-            List<SucursalCLS> lista = sucursalBL.filtrarSucursal(nombresucursal); // Pasar el parámetro nombresucursal
+            List<SucursalCLS> lista = sucursalBL.filtrarSucursal(nombresucursal, nombreDireccion); // Pasar el parámetro nombresucursal
             return Json(lista);
         }
 
