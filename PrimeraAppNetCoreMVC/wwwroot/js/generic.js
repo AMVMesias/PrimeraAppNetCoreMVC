@@ -6,20 +6,17 @@ function set(idControl, valor) {
     return document.getElementById(idControl).value = valor;
 }
 
-
 function setN(namecontrol, valor) {
-    document.getElementById(namecontrol)[0].value = valor
+    document.getElementsByName(namecontrol)[0].value = valor;
 }
 
 function LimpiarDatos(idFormulario) {
-    let elementosName = document.querySelectorAll('#' + idFormulario + "[name]")
+    let elementosName = document.querySelectorAll('#' + idFormulario + ' [name]');
     let elementoActual;
     for (let i = 0; i < elementosName.length; i++) {
         elementoActual = elementosName[i];
-        elementosName = elementoActual.name;
-        setN(elementosName,"")
+        setN(elementoActual.name, "");
     }
-
 }
 
 async function fetchGet(url, tiporespuesta, callback) {
@@ -28,13 +25,13 @@ async function fetchGet(url, tiporespuesta, callback) {
         let urlCompleta = window.location.protocol + "//" + window.location.host + "/" + raiz + url;
         let res = await fetch(urlCompleta);
         let data;
-        if (tiporespuesta == "json")
+        if (tiporespuesta === "json")
             data = await res.json();
-        else if (tiporespuesta == "text")
+        else if (tiporespuesta === "text")
             data = await res.text();
         callback(data);
     } catch (e) {
-        alert("algo salio mal " + e.message);
+        alert("Algo salió mal: " + e.message);
     }
 }
 
@@ -61,8 +58,6 @@ function pintar(objConfiguration) {
     }
 }
 
-
-
 function generarTabla(res) {
     if (!res || res.length === 0) {
         return "<p>No se encontraron resultados</p>";
@@ -74,7 +69,7 @@ function generarTabla(res) {
     contenido += "<table class='table'>";
     contenido += "<thead>";
     contenido += "<tr>";
-    for (var i = 0; i < cabeceras.length; i++) {
+    for (let i = 0; i < cabeceras.length; i++) {
         contenido += "<th>" + cabeceras[i] + "</th>";
     }
     contenido += "</tr>";
@@ -105,13 +100,13 @@ async function fetchPost(url, tiporespuesta, frm, callback) {
             body: frm
         });
         let data;
-        if (tiporespuesta == "json")
+        if (tiporespuesta === "json")
             data = await res.json();
-        else if (tiporespuesta == "text")
+        else if (tiporespuesta === "text")
             data = await res.text();
         callback(data);
     } catch (e) {
         console.error(e);
-        alert("Ocurrio un problema en POST: " + e.message);
+        alert("Ocurrió un problema en POST: " + e.message);
     }
 }
