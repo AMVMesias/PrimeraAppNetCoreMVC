@@ -3,7 +3,7 @@ using CapaEntidad;
 using System.Data;
 using System.Data;
 using System.Data.SqlClient;
-public class TipoMedicamentoDAL
+public class TipoMedicamentoDAL : BaseDAL
 {
     public List<TipoMedicamentoCLS> listarTipoMedicamento()
     {
@@ -32,6 +32,20 @@ public class TipoMedicamentoDAL
             lista = null;
         }
         return lista;
+    }
+
+
+    public int GuardarDatos(TipoMedicamentoCLS objTipoMedicamento)
+    {
+        string sqlCommand = "INSERT INTO TipoMedicamento(NOMBRE, DESCRIPCION, BHABILITADO) VALUES(@nombre, @descripcion, 1)";
+
+        SqlParameter[] parametros = new SqlParameter[]
+        {
+                new SqlParameter("@nombre", objTipoMedicamento.nombre),
+                new SqlParameter("@descripcion", objTipoMedicamento.descripcion)
+        };
+
+        return EjecutarComandoSQL(sqlCommand, parametros);
     }
 
     public List<TipoMedicamentoCLS > filtrarTipoMedicamento(string nombreTipoMedicamento)

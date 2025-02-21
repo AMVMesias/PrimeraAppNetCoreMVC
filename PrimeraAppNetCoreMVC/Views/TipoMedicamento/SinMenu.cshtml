@@ -9,6 +9,28 @@
     @*    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="BuscarTipoMedicamento()">Buscar</button>
     <button id="btnLimpiar" class="btn btn-outline-secondary" type="button" onclick="LimpiarControl()">Limpiar</button> *@
 </div>
+<fieldset>
+    <legend>Guardar Laboratorios</legend>
+    <form id="frmGuardar" method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+            </div>
+            <div class="col-md-6">
+                <label for="direccion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Direccion">
+            </div>
+        </div>
+    </form>
+</fieldset>
+
+<div class="row g-3 mt-3">
+    <div class="d-grid gap-2">
+        <button type="button" class="btn btn-primary" onclick="GuardarTipoMedicamento()">Guardar</button>
+        <button type="button" class="btn btn-danger" onclick="LimpiarTipoMedicamento()">Limpiar</button>
+    </div>
+</div>
 <div id="divTabla"></div>
 
 <script src="~/js/tipomedicamento.js"></script>

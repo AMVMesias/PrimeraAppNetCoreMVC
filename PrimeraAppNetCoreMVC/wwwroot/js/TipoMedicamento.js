@@ -37,3 +37,20 @@ function filtrarTipoMedicamento() {
     }
 }
 
+function GuardarTipoMedicamento() {
+
+    let frmGuardar = document.getElementById("frmGuardar")
+    let frm = new FormData(frmGuardar);
+    fetchPost("TipoMedicamento/GuardarDatos", "text", frm, function (res) {
+        if (res == "1") {
+            listarTipoMedicamento();
+            LimpiarFormulario();
+        }
+    });
+
+}
+
+function LimpiarFormulario() {
+    LimpiarDatos("frmGuardar");
+    listarTipoMedicamento();
+}

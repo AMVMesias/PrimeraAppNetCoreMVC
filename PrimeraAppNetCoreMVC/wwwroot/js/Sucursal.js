@@ -30,3 +30,21 @@ function LimpiarFormulario() {
     LimpiarDatos("frmBusqueda");
     listarSucursales();
 }
+
+function GuardarSucursal() {
+
+    let frmGuardar = document.getElementById("frmGuardarSucursal")
+    let frm = new FormData(frmGuardar);
+    fetchPost("Sucursal/GuardarSucursal", "text", frm, function (res) {
+        if (res == "1") {
+            listarSucursales();
+            LimpiarSucursal();
+        }
+    });
+
+}
+
+function LimpiarSucursal() {
+    LimpiarDatos("frmGuardarSucursal");
+    listarSucursales();
+}

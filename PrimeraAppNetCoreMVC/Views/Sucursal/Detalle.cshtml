@@ -24,6 +24,30 @@
         <button type="button" class="btn btn-danger" onclick="LimpiarFormulario()">Limpiar</button>
     </div>
 </div>
+
+<fieldset>
+    <legend>Guardar Sucursales</legend>
+    <form id="frmGuardarSucursal" method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="NOMBRE" name="NOMBRE" placeholder="Nombre">
+            </div>
+            <div class="col-md-6">
+                <label for="direccion" class="form-label">Direccion</label>
+                <input type="text" class="form-control" id="DIRECCION" name="DIRECCION" placeholder="Direccion">
+            </div>
+        </div>
+    </form>
+</fieldset>
+
+<div class="row g-3 mt-3">
+    <div class="d-grid gap-2">
+        <button type="button" class="btn btn-primary" onclick="GuardarSucursal()">Guardar</button>
+        <button type="button" class="btn btn-danger" onclick="LimpiarSucursal()">Limpiar</button>
+    </div>
+</div>
+
 <div id="divTabla" class="mt-3"></div>
 <script src="~/js/generic.js"></script>
 <script src="~/js/sucursal.js"></script>

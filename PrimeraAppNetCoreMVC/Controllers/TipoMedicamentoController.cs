@@ -61,5 +61,10 @@ namespace PrimeraAppNetCoreMVC.Controllers
             TipoMedicamentoBL obj = new TipoMedicamentoBL();
             return obj.filtrarTipoMedicamento(nombreTipoMedicamento); // Llamar al método filtrarTipoMedicamento
         }
+        public int GuardarDatos(TipoMedicamentoCLS otipoMedicamentoCLS)
+        {
+            TipoMedicamentoBL obj = new TipoMedicamentoBL();
+            return obj.GuardarTipoMedicamento(otipoMedicamentoCLS);
+        }
     }
 }

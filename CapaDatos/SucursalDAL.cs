@@ -34,5 +34,19 @@ namespace CapaDatos
                 },
                 parametros);
         }
+
+
+        public int GuardarDatosSucursal(SucursalCLS objSucursal)
+        {
+            string sqlCommand = "INSERT INTO Sucursal(NOMBRE, DIRECCION, BHABILITADO) VALUES(@nombre, @direccion, 1)";
+
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("@nombre", objSucursal.NOMBRE),
+                new SqlParameter("@direccion", objSucursal.DIRECCION)
+            };
+
+            return EjecutarComandoSQL(sqlCommand, parametros);
+        }
     }
 }

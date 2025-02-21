@@ -29,6 +29,33 @@ namespace CapaDatos
             return lista;
         }
 
+        protected int EjecutarComandoSQL(string sqlCommand, SqlParameter[] parametros)
+        {
+            int filasAfectadas = 0;
+            try
+            {
+                SqlConnection conn = new SqlConnection(DatabaseHelper.GetConnectionString());
+                using (SqlCommand cmd = new SqlCommand(sqlCommand, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    if (parametros != null)
+                    {
+                        cmd.Parameters.AddRange(parametros);
+                    }
+                    conn.Open();
+                    filasAfectadas = cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            catch (Exception)
+            {
+                filasAfectadas = 0;
+            }
+            return filasAfectadas;
+        }
+
+
+
         private SqlDataReader EjecutarConParametros(string storeProcedure, SqlParameter[] parametros)
         {
             SqlConnection conn = new SqlConnection(DatabaseHelper.GetConnectionString());

@@ -25,6 +25,13 @@ namespace PrimeraAppNetCoreMVC.Controllers
         {
             return View();
         }
+
+        public int GuardarSucursal(SucursalCLS oSucurscal)
+        {
+            SucursalBL obj = new SucursalBL();
+            return obj.GuardarSucursal(oSucurscal);
+        }
+
     }
 }
 

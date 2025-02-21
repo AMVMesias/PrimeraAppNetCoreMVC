@@ -17,6 +17,16 @@ namespace CapaNegocio
         {
             return sucursalDAL.filtrarSucursal(nombresucursal, nombreDireccion); // Pasar el parámetro al método de SucursalDAL
         }
+        public int GuardarSucursal(SucursalCLS objSucursal)
+        {
+
+            if (string.IsNullOrEmpty(objSucursal.NOMBRE))
+            {
+                return 0; 
+            }
+
+            return sucursalDAL.GuardarDatosSucursal(objSucursal);
+        }
     }
 }
 
