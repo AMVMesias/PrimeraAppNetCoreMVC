@@ -8,7 +8,9 @@ async function listarTipoMedicamento() {
     objTipoMedicamento = {
         url: "TipoMedicamento/listarTipoMedicamento",
         cabeceras: ["ID Tipo de Medicamento", "Nombre", "Descripción"],
-        propiedades: ["idMedicamento", "nombre", "descripcion"]
+        propiedades: ["idMedicamento", "nombre", "descripcion"],
+        editar: true,
+        eliminar: true
     };
     pintar(objTipoMedicamento);
 }

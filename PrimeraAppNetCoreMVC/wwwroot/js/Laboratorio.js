@@ -9,7 +9,9 @@ async function listarLaboratorios() {
         url: "Laboratorio/listarLaboratorios",
         cabeceras: ["ID Sucursal", "Nombre", "Dirección", "Contacto"],
         propiedades: ["iidlaboratorio", "nombre", "direccion", "personacontacto"],
-        divContenedorTabla: "divTabla"
+        divContenedorTabla: "divTabla",
+        editar: true,
+        eliminar: true
     };
     pintar(objLaboratorio);
 }

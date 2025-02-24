@@ -10,6 +10,8 @@ async function listarSucursales() {
         cabeceras: ["ID Sucursal", "Nombre", "Dirección"],
         propiedades: ["iidsucursal", "nombre", "direccion"],
         divContenedorTabla: "divTabla",
+        editar: true,
+        eliminar: true,
         datos: null  // Add this property
     };
     pintar(objSucursal);
