@@ -7,7 +7,7 @@ namespace PrimeraAppNetCoreMVC.Controllers
     public class LaboratorioController : Controller
     {
         // GET: LaboratorioController
-        public ActionResult LaboratorioView()
+        public ActionResult Laboratorio()
         {
             return View();
         }

@@ -17,7 +17,7 @@ namespace PrimeraAppNetCoreMVC.Controllers
             return View();
         }
 
-        public IActionResult SinMenu()
+        public IActionResult TipoMedicamento()
         {
             return View();
         }

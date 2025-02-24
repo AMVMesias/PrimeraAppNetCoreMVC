@@ -21,7 +21,7 @@ namespace PrimeraAppNetCoreMVC.Controllers
             return Json(lista);
         }
 
-        public IActionResult Detalle()
+        public IActionResult Sucursal()
         {
             return View();
         }
