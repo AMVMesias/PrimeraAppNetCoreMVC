@@ -6,7 +6,7 @@ namespace CapaDatos
 {
     public class DatabaseHelper
     {
-        public static string GetConnectionString() // Cambiar a public
+        public static string GetConnectionString()
         {
             IConfigurationBuilder builder = new ConfigurationBuilder();
             builder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"));

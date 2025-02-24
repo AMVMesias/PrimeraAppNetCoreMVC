@@ -85,6 +85,46 @@ public class TipoMedicamentoDAL : BaseDAL
         }
         return lista;
     }
+
+
+
+    public List<TipoMedicamentoCLS> recuperarTipoMedicamento(int idTipoMedicamento)
+    {
+        List<TipoMedicamentoCLS> lista = new List<TipoMedicamentoCLS>();
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(DatabaseHelper.GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT IIDTIPOMEDICAMENTO, NOMBRE, DESCRIPCION FROM TipoMedicamento WHERE BHABILITADO = 1 AND IIDTIPOMEDICAMENTO = @id", conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@id", idTipoMedicamento);
+
+                    conn.Open();
+                    using (SqlDataReader drd = cmd.ExecuteReader())
+                    {
+                        while (drd != null && drd.Read())
+                        {
+                            lista.Add(new TipoMedicamentoCLS
+                            {
+                                idMedicamento = drd.GetInt32(0),
+                                nombre = drd.GetString(1),
+                                descripcion = drd.GetString(2)
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in recuperarTipoMedicamento: {ex.Message}");
+            lista = null;
+        }
+        return lista;
+    }
+
+
 }
 
 

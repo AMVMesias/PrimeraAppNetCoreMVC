@@ -10,7 +10,8 @@ async function listarTipoMedicamento() {
         cabeceras: ["ID Tipo de Medicamento", "Nombre", "Descripción"],
         propiedades: ["idMedicamento", "nombre", "descripcion"],
         editar: true,
-        eliminar: true
+        eliminar: true,
+        propiedadID: "idMedicamento"
     };
     pintar(objTipoMedicamento);
 }
@@ -56,3 +57,8 @@ function LimpiarFormulario() {
     LimpiarDatos("frmGuardar");
     listarTipoMedicamento();
 }
+
+//function Editar(id) {
+//    recuperarGenerico("TipoMedicamento/recuperarTipoMedicamento/?idMedicamento="+id , "frmGuardar"); {
+
+//}

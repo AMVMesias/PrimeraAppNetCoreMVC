@@ -66,5 +66,10 @@ namespace PrimeraAppNetCoreMVC.Controllers
             TipoMedicamentoBL obj = new TipoMedicamentoBL();
             return obj.GuardarTipoMedicamento(otipoMedicamentoCLS);
         }
+        public TipoMedicamentoCLS recuperarTipoMedicamento(int idTipoMedicamento)
+        {
+            TipoMedicamentoBL obj = new TipoMedicamentoBL();
+            return obj.recuperarTipoMedicamento(idTipoMedicamento);
+        }
     }
 }

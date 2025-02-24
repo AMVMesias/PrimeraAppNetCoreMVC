@@ -19,8 +19,7 @@ namespace CapaNegocio
         }
         public int GuardarTipoMedicamento(TipoMedicamentoCLS objTipoMedicamento)
         {
-            // Aquí puedes agregar validaciones de negocio antes de guardar
-            // Por ejemplo, verificar que el nombre no esté vacío
+
             if (string.IsNullOrEmpty(objTipoMedicamento.nombre))
             {
                 return 0; // Retorna 0 para indicar error
@@ -28,6 +27,17 @@ namespace CapaNegocio
 
             // Llama al método de la capa de datos para guardar
             return tipoMedicamentoDAL.GuardarDatos(objTipoMedicamento);
+        }
+
+        public TipoMedicamentoCLS recuperarTipoMedicamento(int idTipoMedicamento)
+        {
+            if (idTipoMedicamento <= 0)
+            {
+                return null;
+            }
+
+            var lista = tipoMedicamentoDAL.recuperarTipoMedicamento(idTipoMedicamento);
+            return lista?.FirstOrDefault();
         }
     }
 }
