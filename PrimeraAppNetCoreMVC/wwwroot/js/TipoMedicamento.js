@@ -30,11 +30,17 @@ function filtrarTipoMedicamento() {
 function GuardarTipoMedicamento() {
     let frmGuardar = document.getElementById("frmGuardar")
     let frm = new FormData(frmGuardar);
-    fetchpost("TipoMedicamento/GuardarDatos", "text", frm, function (res) {
-        if (res == "1") {
-            listarTipoMedicamento();
-            LimpiarFormulario();
-        }
+
+    Confirmacion(undefined, undefined, function (rpta) {
+        fetchpost("TipoMedicamento/GuardarDatos", "text", frm, function (res) {
+            if (res == "1") {
+                Exito();
+                listarTipoMedicamento();
+                LimpiarFormulario();
+            } else {
+                Error();
+            }
+        });
     });
 }
 
@@ -49,29 +55,64 @@ function Editar(id) {
         return;
     }
 
-    fetchGet("TipoMedicamento/recuperarTipoMedicamento?idTipoMedicamento=" + id, "json", function (data) {
-        console.log("Datos recibidos en Editar:", data);
-
+    fetchGet("TipoMedicamento/recuperarTipoMedicamento/?idTipoMedicamento=" + id, "json", function (data) {
         if (!data) {
-            alert("Error al recuperar los datos");
+            Error();
             return;
         }
 
-        // Asignar valores directamente ya que el controlador devuelve el objeto TipoMedicamentoCLS
-        setN("idMedicamento", data.idMedicamento);
-        setN("nombre", data.nombre);
-        setN("descripcion", data.descripcion);
+        let idInput = document.getElementById("idMedicamentoEditar");
+        let nombreInput = document.getElementById("nombreEditar");
+        let descripcionInput = document.getElementById("descripcionEditar");
+
+        if (idInput && nombreInput && descripcionInput) {
+            idInput.value = data.idMedicamento;
+            nombreInput.value = data.nombre;
+            descripcionInput.value = data.descripcion;
+
+            let modalElement = document.getElementById('modalEditar');
+            if (modalElement) {
+                var modal = new bootstrap.Modal(modalElement);
+                modal.show();
+            }
+        } else {
+            console.error('No se encontraron los elementos del formulario');
+        }
     });
 }
 
 
 
 function Eliminar(id) {
-    if (confirm("¿Desea eliminar este registro?")) {
-        fetchGet("TipoMedicamento/eliminarTipoMedicamento/?id=" + id, "text", function (data) {
-            if (data == "1") {
+    fetchGet("TipoMedicamento/recuperarTipoMedicamento/?idTipoMedicamento=" + id, "json", function (medicamento) {
+        if (medicamento) {
+            Confirmacion("Eliminar registro", `¿Está seguro que desea eliminar "${medicamento.nombre}"?`, function () {
+                fetchGet("TipoMedicamento/eliminarTipoMedicamento/?id=" + id, "text", function (data) {
+                    if (data == "1") {
+                        Notificacion("success", `Se eliminó "${medicamento.nombre}" correctamente`, "¡Eliminado!");
+                        listarTipoMedicamento();
+                    } else {
+                        Notificacion("error", `No se pudo eliminar "${medicamento.nombre}"`, "¡Error!");
+                    }
+                });
+            });
+        }
+    });
+}
+function GuardarEdicion() {
+    let frmEditar = document.getElementById("frmEditar")
+    let frm = new FormData(frmEditar);
+
+    Confirmacion("Confirmar edición", "¿Desea guardar los cambios?", function () {
+        fetchpost("TipoMedicamento/GuardarDatos", "text", frm, function (res) {
+            if (res == "1") {
+                Exito();
                 listarTipoMedicamento();
+                var modal = bootstrap.Modal.getInstance(document.getElementById('modalEditar'));
+                modal.hide();
+            } else {
+                Error();
             }
         });
-    }
+    });
 }

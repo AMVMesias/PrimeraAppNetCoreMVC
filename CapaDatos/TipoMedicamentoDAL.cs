@@ -100,6 +100,20 @@ public class TipoMedicamentoDAL : BaseDAL
 
 
 
+
+    public int EliminarDatos(int idMedicamento)
+    {
+        string sqlCommand = "UPDATE TipoMedicamento SET BHABILITADO = 0 WHERE IIDTIPOMEDICAMENTO = @idMedicamento";
+
+        SqlParameter[] parametros = new SqlParameter[]
+        {
+        new SqlParameter("@idMedicamento", idMedicamento)
+        };
+
+        return EjecutarComandoSQL(sqlCommand, parametros);
+    }
+
+
     public List<TipoMedicamentoCLS> recuperarTipoMedicamento(int idTipoMedicamento)
     {
         List<TipoMedicamentoCLS> lista = new List<TipoMedicamentoCLS>();

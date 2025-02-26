@@ -36,9 +36,40 @@
     </div>
 </div>
 
+<!-- Agregar después del div divtabla -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarLabel">Editar Tipo Medicamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmEditar" method="post">
+                    <input type="hidden" id="idMedicamentoEditar" name="idMedicamento">
+                    <div class="mb-3">
+                        <label for="nombreEditar" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombreEditar" name="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionEditar" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcionEditar" name="descripcion">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarEdicion()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="divtabla"></div>
 
 @section Scripts {
     <script src="~/js/generic.js"></script>
     <script src="~/js/tipomedicamento.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 }

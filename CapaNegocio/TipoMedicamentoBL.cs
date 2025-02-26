@@ -39,5 +39,23 @@ namespace CapaNegocio
             var lista = tipoMedicamentoDAL.recuperarTipoMedicamento(idTipoMedicamento);
             return lista?.FirstOrDefault();
         }
+        public int EliminarTipoMedicamento(int id)
+        {
+            // Validación básica del ID
+            if (id <= 0)
+            {
+                return 0;
+            }
+
+            // Verificar si el medicamento existe antes de eliminarlo
+            var medicamento = recuperarTipoMedicamento(id);
+            if (medicamento == null)
+            {
+                return 0;
+            }
+
+            // Proceder con la eliminación lógica
+            return tipoMedicamentoDAL.EliminarDatos(id);
+        }
     }
 }

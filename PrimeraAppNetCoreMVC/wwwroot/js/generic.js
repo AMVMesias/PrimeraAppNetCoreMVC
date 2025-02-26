@@ -158,3 +158,72 @@ function recuperar(url, idFormulario) {
         }
     });
 }
+
+function Confirmacion(titulo = "Confirmacion", texto = "desara guardar los cambios", callback) {
+    Swal.fire({
+        title: titulo,
+        text: texto,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        }
+    });
+}
+
+function Exito() {
+    toastr.options = {
+        "closeButton": true,
+        "positionClass": "toast-top-full-width",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "hideMethod": "slideUp"  
+    }
+    toastr.success("Registro guardado"); 
+}
+
+function Error() {
+    toastr.options = {
+        "positionClass": "toast-top-full-width",
+        "timeOut": "3000",
+        "extendedTimeOut": "2000",
+        "hideMethod": "slideUp"  
+    }
+    toastr.error("Ocurrió un error"); 
+}
+
+
+
+function ConfigurarToastr() {
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "hideMethod": "slideUp"
+    }
+}
+
+function Notificacion(tipo, mensaje, titulo = "") {
+    ConfigurarToastr();
+    switch (tipo.toLowerCase()) {
+        case "success":
+            toastr.success(mensaje, titulo);
+            break;
+        case "error":
+            toastr.error(mensaje, titulo);
+            break;
+        case "warning":
+            toastr.warning(mensaje, titulo);
+            break;
+        case "info":
+            toastr.info(mensaje, titulo);
+            break;
+    }
+}
