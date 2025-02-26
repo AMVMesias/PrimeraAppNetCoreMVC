@@ -82,7 +82,7 @@ function pintar(objConfiguration) {
             contenido += `<div id='${objConfigurationGlobal.divContenedorTabla}'>`;
             contenido += generarTabla(res);
             contenido += "</div>";
-            document.getElementById("divTabla").innerHTML = contenido;
+        document.getElementById("divtabla").innerHTML = contenido;
         });
     }
 }
