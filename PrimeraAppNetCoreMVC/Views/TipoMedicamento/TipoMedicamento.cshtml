@@ -1,29 +1,29 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "TipoMedicamento";
 }
 
 <h1>Tipo Medicamento</h1>
 <div class="input-group mb-3">
-    <input type="text" id="txtNombreBusqueda" class="form-control" placeholder="Tipo de Medicamento" aria-label="Tipo de Medicamento" aria-describedby="button-addon2" onkeyup="filtrarTipoMedicamento()">
-    @*    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="BuscarTipoMedicamento()">Buscar</button>
-    <button id="btnLimpiar" class="btn btn-outline-secondary" type="button" onclick="LimpiarControl()">Limpiar</button> *@
+    <input type="text" id="txtNombreBusqueda" class="form-control" placeholder="Tipo de Medicamento"
+           aria-label="Tipo de Medicamento" aria-describedby="button-addon2"
+           onkeyup="filtrarTipoMedicamento()">
 </div>
+
 <fieldset>
-    <legend>Guardar Laboratorios</legend>
+    <legend>Guardar Tipo Medicamento</legend>
     <form id="frmGuardar" method="post">
         <div class="row g-3">
             <div class="col-md-6">
-                <label for="nombre" class="form-label">Id Tipo Medicamento</label>
-                <input type="text" class="form-control" id="idMedicamento" name="idMedicamento" placeholder="Nombre">
+                <label for="idMedicamento" class="form-label">Id Tipo Medicamento</label>
+                <input type="text" class="form-control" id="idMedicamento" name="idMedicamento" placeholder="Id" readonly>
             </div>
             <div class="col-md-6">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
             </div>
             <div class="col-md-6">
-                <label for="direccion" class="form-label">Descripcion</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Direccion">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción">
             </div>
         </div>
     </form>
@@ -32,12 +32,13 @@
 <div class="row g-3 mt-3">
     <div class="d-grid gap-2">
         <button type="button" class="btn btn-primary" onclick="GuardarTipoMedicamento()">Guardar</button>
-        <button type="button" class="btn btn-danger" onclick="LimpiarTipoMedicamento()">Limpiar</button>
+        <button type="button" class="btn btn-danger" onclick="LimpiarFormulario()">Limpiar</button>
     </div>
 </div>
-<div id="divTabla"></div>
-<script src="~/js/tipomedicamento.js"></script>
-<script src="~/js/generic.js"></script>
-<!-- Ejemplo de enlace en SinMenu.cshtml -->
-@* <a asp-controller="Sucursal" asp-action="Detalle" asp-route-id="1">Ver Detalles de Sucursal 1</a>
- *@
+
+<div id="divtabla"></div>
+
+@section Scripts {
+    <script src="~/js/generic.js"></script>
+    <script src="~/js/tipomedicamento.js"></script>
+}

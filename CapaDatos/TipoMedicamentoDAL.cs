@@ -37,12 +37,24 @@ public class TipoMedicamentoDAL : BaseDAL
 
     public int GuardarDatos(TipoMedicamentoCLS objTipoMedicamento)
     {
-        string sqlCommand = "INSERT INTO TipoMedicamento(NOMBRE, DESCRIPCION, BHABILITADO) VALUES(@nombre, @descripcion, 1)";
+        string sqlCommand;
+        if (objTipoMedicamento.idMedicamento == 0)
+        {
+            // Inserción
+            sqlCommand = "INSERT INTO TipoMedicamento(NOMBRE, DESCRIPCION, BHABILITADO) VALUES(@nombre, @descripcion, 1)";
+        }
+        else
+        {
+            // Actualización
+            sqlCommand = "UPDATE TipoMedicamento SET NOMBRE = @nombre, DESCRIPCION = @descripcion " +
+                        "WHERE IIDTIPOMEDICAMENTO = @idMedicamento";
+        }
 
         SqlParameter[] parametros = new SqlParameter[]
         {
-                new SqlParameter("@nombre", objTipoMedicamento.nombre),
-                new SqlParameter("@descripcion", objTipoMedicamento.descripcion)
+        new SqlParameter("@nombre", objTipoMedicamento.nombre),
+        new SqlParameter("@descripcion", objTipoMedicamento.descripcion),
+        new SqlParameter("@idMedicamento", objTipoMedicamento.idMedicamento)
         };
 
         return EjecutarComandoSQL(sqlCommand, parametros);
